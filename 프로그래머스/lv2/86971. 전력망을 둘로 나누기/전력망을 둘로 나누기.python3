@@ -1,0 +1,30 @@
+import copy
+from collections import defaultdict
+def solution(n, real_wires):
+    real_answer = n+5
+    for i in range(len(real_wires)):
+        wires = copy.deepcopy(real_wires)
+        wires.pop(i)
+        graph = defaultdict(list)
+        for w in wires:
+            graph[w[0]].append(w[1])
+            graph[w[1]].append(w[0])
+        visited = []
+        def dfs(n, check):
+            check.append(n)
+            visited.append(n)
+            for i in graph[n]:
+                if not i in check:
+                    dfs(i, check)
+
+            return check
+        answer = []
+        for i in range(1, n+1):
+            check = []
+            if not i in visited:
+                answer.append(dfs(i, check))
+
+        if abs(len(answer[0]) - len(answer[1])) < real_answer:
+            real_answer = abs(len(answer[0]) - len(answer[1]))
+
+    return real_answer
