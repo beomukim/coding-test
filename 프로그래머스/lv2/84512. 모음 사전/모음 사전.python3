@@ -1,0 +1,20 @@
+def change(s):
+    char = ['A', 'E', 'I', 'O', 'U']
+    for i in range(4):
+        if s == char[i]:
+            return char[i+1]
+def solution(real_word):
+    word = ['A']
+    answer = 1
+    while True:
+        if ''.join(word) == real_word:
+            return answer
+        if len(word) < 5:
+            word.append('A')
+        else:
+            while word[-1] == 'U':
+                word.pop()
+
+            word[-1] = change(word[-1])
+
+        answer += 1
