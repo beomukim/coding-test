@@ -1,0 +1,25 @@
+from collections import defaultdict
+from collections import deque
+def solution(N, road, K):
+    answer = 0
+    map = defaultdict(list)
+    for r in road:
+        map[r[0]].append((r[1], r[2]))
+        map[r[1]].append((r[0], r[2]))
+    
+    visited = [False for _ in range(N+1)] 
+    distance = [2000 * 50 * 5 for _ in range(N+1)]
+    distance[1] = 0
+    q = deque([1])
+    while q:
+        n = q.popleft()
+        visited[n] = True
+        map[n].sort(key=lambda x:x[1])
+        for i in map[n]:
+
+            if distance[n] + i[1] < distance[i[0]]:
+                q.append(i[0])
+
+                distance[i[0]] = distance[n] + i[1]
+                
+    return len([i for i in distance[2:] if i <= K]) + 1
