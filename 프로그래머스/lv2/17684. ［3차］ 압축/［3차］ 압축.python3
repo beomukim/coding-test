@@ -1,0 +1,19 @@
+from collections import defaultdict
+def solution(msg):
+    answer = []
+    dict_add = defaultdict(int)
+    i = 0
+    count = 26
+    while i < len(msg):
+        dict_add[msg[i]] = ord(msg[i]) - 64
+        k = 1
+        while msg[i:i+k] in dict_add:
+            k += 1
+            if i+k > len(msg):
+                break
+        answer.append(dict_add[msg[i:i+k-1]])
+        count += 1
+        dict_add[msg[i:i+k]] = count
+
+        i += k - 1
+    return answer
