@@ -1,0 +1,13 @@
+def solution(s):
+    answer = []
+    zero_count = 0
+    count = 0
+    while len(s) > 1:
+        former_length = len(s)
+        s = s.replace('0', '')
+        zero_count += former_length - len(s)
+        s = str(bin(len(s)))[2:]
+        count += 1
+    answer.append(count)
+    answer.append(zero_count)
+    return answer
