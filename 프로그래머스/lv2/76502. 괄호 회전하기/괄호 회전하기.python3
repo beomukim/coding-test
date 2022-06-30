@@ -1,0 +1,23 @@
+from collections import deque
+def isCorrect(s):
+    bracket = {')' : '(', '}' : '{', ']' : '['}
+    stack = []
+    for i in s:
+        if i == '(' or i == '[' or i == '{':
+            stack.append(i)
+        else:
+            if not stack:
+                return False
+            if stack[-1] == bracket[i]:
+                stack.pop()
+    
+    return True if not stack else False
+def solution(s):
+    answer = 0
+    q = deque(s)
+    for _ in range(len(s)):
+        q.append(q.popleft())
+        if isCorrect(''.join(q)):
+            answer += 1
+
+    return answer
