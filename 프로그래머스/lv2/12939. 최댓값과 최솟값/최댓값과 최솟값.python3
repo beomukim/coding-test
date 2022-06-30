@@ -1,0 +1,7 @@
+def solution(s):
+    s = list(map(int, s.split()))
+    answer = []
+    answer.append(str(min(s)))
+    answer.append(str(max(s)))
+
+    return ' '.join(answer)
