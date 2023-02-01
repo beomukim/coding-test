@@ -5,6 +5,6 @@ FROM
 GROUP BY 
     1, 2 
 HAVING
-    count(product_id) > 1
+    count(*) > 1
 ORDER BY
     1, 2 desc
